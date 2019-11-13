@@ -52,6 +52,7 @@ function draw() {
   
   if(keyDown("space")) {
     trex.velocityY = -10;
+    jumpSound.play();
   }
   
   trex.velocityY = trex.velocityY + 0.8
@@ -63,6 +64,16 @@ function draw() {
   trex.collide(invisibleGround);
   spawnClouds();
   spawnObstacles();
+  
+  if (ObstaclesGroup.isTouching( trex)){
+    dieSound.play();
+      gameState = END;
+  }
+  
+  if(score>0 && score%100===0){
+    checkPointSound.play();
+  }  
+  
   drawSprites();
 }
 
